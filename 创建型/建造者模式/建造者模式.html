@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class builderCar {
+        color
+        constructor(color) {
+          this.color = color
+        }
+        builderName(name) {
+          this.name = name
+          return this
+        }
+        builderHeight(height) {
+          this.height = height
+          return this
+        }
+      }
+      const car = new builderCar('red').builderHeight(123).builderName('myCar')
+      console.log('%c Line:26 🍖 car', 'color:#fca650', car)
+    </script>
+  </body>
+</html>

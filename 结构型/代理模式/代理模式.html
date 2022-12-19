@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const Practitioners = {
+        isFree: false,
+        behavior: (text) => {
+          console.log('%c Line:15 🍔', 'color:#b03734', text)
+        }
+      }
+
+      const MyProxy = {
+        scheduleTime: (text) => {
+          const scheduleProxy = new Proxy(Practitioners, {
+            set(obj, prop, val) {
+              if (prop !== 'isFree') return
+              if (obj.isFree === false && val === true) {
+                obj.isFree = true
+                obj.behavior(text)
+              }
+            }
+          })
+          setTimeout(() => {
+            scheduleProxy.isFree = true
+          }, 2000)
+        },
+        playAdvertisement(conditions, text) {
+          if (conditions) {
+            this.scheduleTime(text)
+            return
+          }
+          console.log('%c Line:36 🍒', 'color:#465975', 'error')
+        }
+      }
+      MyProxy.playAdvertisement(true, '22222')
+    </script>
+  </body>
+</html>

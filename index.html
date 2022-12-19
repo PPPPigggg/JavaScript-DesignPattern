@@ -4,9 +4,43 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>草稿本</title>
   </head>
   <body>
-    <script></script>
+    <script>
+      // const originFn = {
+      //   fn() {
+      //     console.log('%c Line:14 🍉', 'color:#3f7cff', 'originFn')
+      //   }
+      // }
+      // const newFn = () => {
+      //   console.log('%c Line:18 🥔', 'color:#42b983', 'newFn')
+      // }
+      // const fn = originFn.fn
+      // originFn.fn = () => {
+      //   return function () {
+      //     fn && fn()
+      //     newFn()
+      //   }
+      // }
+      // originFn.fn()()
+
+      const originFn = {
+        fn() {
+          console.log('%c Line:14 🍉', 'color:#3f7cff', 'originFn')
+        }
+      }
+      const newFn = () => {
+        console.log('%c Line:18 🥔', 'color:#42b983', 'newFn')
+      }
+      originFn.fn = (() => {
+        const fn = originFn.fn
+        return function () {
+          fn && fn()
+          newFn()
+        }
+      })()
+      originFn.fn()
+    </script>
   </body>
 </html>

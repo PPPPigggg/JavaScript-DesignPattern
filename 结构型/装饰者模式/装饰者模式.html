@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        originFn() {
+          console.log('%c Line:13 🍭', 'color:#6ec1c2', 'originFn')
+        }
+      }
+      function newFn() {
+        console.log('%c Line:18 🥒', 'color:#33a5ff', 'newFn')
+      }
+      obj.originFn = (() => {
+        const fn = obj.originFn
+        return function () {
+          fn && fn()
+          newFn()
+        }
+      })()
+      obj.originFn()
+    </script>
+  </body>
+</html>

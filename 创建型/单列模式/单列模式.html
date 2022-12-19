@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单列模式</title>
+  </head>
+  <body>
+    <script>
+      class MyClass {
+        constructor(bar) {
+          this.bar = bar
+          this.init()
+        }
+        init() {
+          console.log('%c init MyClass 🍇', 'color:#465975')
+        }
+      }
+      const Singleton = (function () {
+        let _instance
+
+        const ProxySingleton = function (bar) {
+          if (_instance) return _instance
+          _instance = new MyClass(bar)
+          return _instance
+        }
+        ProxySingleton.getInstance = function (bar) {
+          if (_instance) return _instance
+          _instance = new Singleton(bar)
+          return _instance
+        }
+        return ProxySingleton
+      })()
+
+      const obj1 = new Singleton('obj1')
+      const obj2 = new Singleton('obj2')
+      const obj3 = new Singleton('obj3')
+
+      console.log('%c Line:39 🍤', 'color:#ed9ec7', obj1 === obj2)
+      console.log('%c Line:39 🍤', 'color:#ed9ec7', obj1 === obj3)
+    </script>
+  </body>
+</html>
