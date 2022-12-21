@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // const createFolder = function (name) {
+      //   return {
+      //     name,
+      //     children: [],
+
+      //     add(fileOrFolder) {
+      //       this.children.push(fileOrFolder)
+      //       return this
+      //     },
+
+      //     scan(fn) {
+      //       this.children.forEach(function (val) {
+      //         val.scan(fn)
+      //       })
+      //     }
+      //   }
+      // }
+
+      // const createFile = function (name, size) {
+      //   return {
+      //     name,
+      //     size,
+
+      //     scan(fn) {
+      //       fn(this)
+      //     }
+      //   }
+      // }
+
+      // const folder = createFolder('folder')
+
+      // const folder1 = createFolder('folder1')
+      // const folder2 = createFolder('folder2')
+
+      // folder.add(folder1).add(folder2)
+
+      // const file1 = createFile('file1', 100)
+      // const file2 = createFile('file2', 13)
+      // const file3 = createFile('file3', 123)
+      // const file4 = createFile('file4', 10)
+      // folder1.add(file1).add(file2)
+      // folder2.add(file3).add(file4)
+
+      // folder.scan(function (instance) {
+      //   if (instance?.size >= 100) {
+      //     console.log('%c Line:55 🍆', 'color:#f5ce50')
+      //   }
+      // })
+
+      const createElement = ({ tag, attr, children }) => {
+        const node = tag
+          ? document.createElement(tag)
+          : document.createTextNode(attr.text)
+
+        tag &&
+          Object.keys(attr).forEach((key) => node.setAttribute(key, attr[key]))
+
+        children &&
+          children.forEach((child) => node.appendChild(createElement(child)))
+
+        return node
+      }
+
+      const ulElement = createElement({
+        tag: 'ul',
+        attr: { id: 'data-list' },
+        children: [
+          {
+            tag: 'li',
+            attr: { class: 'data-item' },
+            children: [{ attr: { text: 'li-item 1' } }]
+          },
+          {
+            tag: 'li',
+            attr: { class: 'data-item' },
+            children: [{ attr: { text: 'li-item 2' } }]
+          },
+          {
+            tag: 'li',
+            attr: { class: 'data-item' },
+            children: [{ attr: { text: 'li-item 3' } }]
+          }
+        ]
+      })
+      console.log('%c Line:74 🌶 ulElement', 'color:#fca650', ulElement)
+    </script>
+  </body>
+</html>

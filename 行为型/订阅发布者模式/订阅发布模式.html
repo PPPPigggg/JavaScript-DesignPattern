@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class EventEmitter {
+        list = {}
+        on(event, func) {
+          const _this = this
+          ;(_this.list[event] || (_this.list[event] = [])).push(func)
+          return _this
+        }
+        emit(event, ...rest) {
+          const _this = this
+          const fn = _this.list[event]
+          if (fn?.length === 0) return
+          fn.forEach((val) => {
+            val.apply(_this, rest)
+          })
+          return _this
+        }
+        once(event, func) {
+          const _this = this
+          function on() {
+            _this.off(event, on)
+            func.apply(_this, arguments)
+          }
+          on.func = func
+          _this.on(event, on)
+          return _this
+        }
+        off(event, func) {
+          const _this = this
+          const fn = _this.list[event]
+          if (fn?.length === 0) return
+          if (!func) {
+            fn.length = 0
+          } else {
+            const fnIndex = fn.findIndex(
+              (val) => val === func || val.func === func
+            )
+            fn.splice(fnIndex, 1)
+          }
+          return _this
+        }
+      }
+      const demo = new EventEmitter()
+      console.log(
+        '%c 🥔 demo: ',
+        'font-size:20px;background-color: #F5CE50;color:#fff;',
+        demo
+      )
+      function event1(val) {
+        console.log(val)
+      }
+      function event2(val) {
+        console.log(val)
+      }
+      function event3(val) {
+        console.log(val)
+      }
+      // demo.on('事件一', event1)
+      demo.on('事件二', event2)
+      demo.on('事件三', event3)
+      demo.once('事件一', event1)
+      demo.emit('事件一', '事件一发布')
+      demo.emit('事件一', '事件一发布')
+      demo.emit('事件一', '事件一发布')
+      demo.emit('事件一', '事件一发布')
+      demo.emit('事件一', '事件一发布')
+      demo.emit('事件二', '事件二发布')
+    </script>
+  </body>
+</html>

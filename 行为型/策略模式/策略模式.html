@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const strategyInstance = {
+        2000: (text) => {
+          console.log('%c Line:14 🥟', 'color:#e41a6a', text)
+        },
+        1000: (text) => {
+          console.log('%c Line:14 🥟', 'color:#e81a2a', text)
+        }
+      }
+      function context(type, ...rest) {
+        strategyInstance[type] && strategyInstance[type](...rest)
+      }
+      context(2000, 'my2000')
+    </script>
+  </body>
+</html>
