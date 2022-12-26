@@ -8,39 +8,7 @@
   </head>
   <body>
     <script>
-      // const originFn = {
-      //   fn() {
-      //     console.log('%c Line:14 🍉', 'color:#3f7cff', 'originFn')
-      //   }
-      // }
-      // const newFn = () => {
-      //   console.log('%c Line:18 🥔', 'color:#42b983', 'newFn')
-      // }
-      // const fn = originFn.fn
-      // originFn.fn = () => {
-      //   return function () {
-      //     fn && fn()
-      //     newFn()
-      //   }
-      // }
-      // originFn.fn()()
 
-      const originFn = {
-        fn() {
-          console.log('%c Line:14 🍉', 'color:#3f7cff', 'originFn')
-        }
-      }
-      const newFn = () => {
-        console.log('%c Line:18 🥔', 'color:#42b983', 'newFn')
-      }
-      originFn.fn = (() => {
-        const fn = originFn.fn
-        return function () {
-          fn && fn()
-          newFn()
-        }
-      })()
-      originFn.fn()
     </script>
   </body>
 </html>

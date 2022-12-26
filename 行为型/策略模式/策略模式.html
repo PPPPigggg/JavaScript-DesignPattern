@@ -8,18 +8,17 @@
   </head>
   <body>
     <script>
-      const strategyInstance = {
-        2000: (text) => {
-          console.log('%c Line:14 🥟', 'color:#e41a6a', text)
-        },
-        1000: (text) => {
-          console.log('%c Line:14 🥟', 'color:#e81a2a', text)
-        }
-      }
+      const StrategyMap = {}
+
       function context(type, ...rest) {
-        strategyInstance[type] && strategyInstance[type](...rest)
+        return StrategyMap[type] && StrategyMap[type](...rest)
       }
-      context(2000, 'my2000')
+
+      StrategyMap.minus100_30 = function (price) {
+        return price - Math.floor(price / 100) * 30
+      }
+
+      context('minus100_30', 270)
     </script>
   </body>
 </html>

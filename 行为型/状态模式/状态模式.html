@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 状态类
+      // class State {
+      //   color
+      //   constructor(color) {
+      //     this.color = color
+      //   }
+      //   handler(trafficLight) {
+      //     console.log('%c Line:19 🍏', 'color:#4fff4B', this.color)
+      //     trafficLight.setState(this)
+      //   }
+      // }
+
+      // class TrafficLight {
+      //   state
+      //   setState(state) {
+      //     this.state = state
+      //   }
+      // }
+      // const trafficLight = new TrafficLight()
+      // const red = new State('red')
+      // const green = new State('green')
+      // const yellow = new State('yellow')
+      // red.handler(trafficLight)
+      // green.handler(trafficLight)
+      // yellow.handler(trafficLight)
+
+      // 状态类
+      class RedState {
+        color
+        constructor(color) {
+          this.color = color
+        }
+        employ() {
+          console.log('%c Line:107 🍏', 'color:#f5ce50', this.color)
+        }
+        change(trafficLight) {
+          trafficLight.setState(trafficLight.greenState)
+        }
+      }
+      class GreenState {
+        color
+        constructor(color) {
+          this.color = color
+        }
+        employ() {
+          console.log('%c Line:107 🍏', 'color:#f5ce50', this.color)
+        }
+        change(trafficLight) {
+          trafficLight.setState(trafficLight.yellowState)
+        }
+      }
+      class YellowState {
+        color
+        constructor(color) {
+          this.color = color
+        }
+        employ() {
+          console.log('%c Line:107 🍏', 'color:#f5ce50', this.color)
+        }
+        change(trafficLight) {
+          trafficLight.setState(trafficLight.redState)
+        }
+      }
+
+      class TrafficLight {
+        constructor() {
+          this.redState = new RedState('red')
+          this.greenState = new GreenState('green')
+          this.yellowState = new YellowState('yellow')
+
+          this.state = this.greenState
+        }
+        setState(state) {
+          state.employ() // 当改变内部状态时,执行对应的行为
+          this.state = state // 在此处改变内部状态
+        }
+        change() {
+          this.state.change(this) // this是关键
+        }
+      }
+
+      const trafficLight = new TrafficLight()
+      trafficLight.change()
+      trafficLight.change()
+      trafficLight.change()
+    </script>
+  </body>
+</html>

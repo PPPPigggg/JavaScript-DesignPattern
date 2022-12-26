@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class BaseDuty {
+        next
+        setNext(instance) {
+          this.next = instance
+          return instance
+        }
+      }
+      class BaseA extends BaseDuty {
+        handler(value) {
+          if ((value === 2)) {
+            console.log('%c Line:21 🍓', 'color:#ea7e5c', 'A-success')
+          } else {
+            console.log('%c Line:21 🍓', 'color:#ea7e5c', 'error')
+          }
+        }
+      }
+      class BaseB extends BaseDuty {
+        handler(value) {
+          if ((value === 1)) {
+            console.log('%c Line:21 🍓', 'color:#ea7e5c', 'B-success')
+          } else {
+            this.next.handler(value)
+          }
+        }
+      }
+      class BaseC extends BaseDuty {
+        handler(value) {
+          if (value <= 0.5) {
+            console.log('%c Line:21 🍓', 'color:#ea7e5c', 'C-success')
+          } else {
+            this.next.handler(value)
+          }
+        }
+      }
+
+      const A = new BaseA()
+      const B = new BaseB()
+      const C = new BaseC()
+      C.setNext(B).setNext(A)
+
+      C.handler(2)
+    </script>
+  </body>
+</html>
